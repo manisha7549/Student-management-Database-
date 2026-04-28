@@ -2,7 +2,7 @@
 
 ## Task 1:
 - Created database and table
-- 
+  
 ## Task 2: 
 -Performed SQL queries for data analysis
 
