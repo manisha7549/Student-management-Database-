@@ -10,3 +10,9 @@
 - Designed student table structure
 - Inserted student data
 - Managed records using SQL
+
+## Task 4:
+- Worked on advanced SQL queries
+- Used subqueries
+- Applied functions like COUNT, SUM, AVG
+- Analyzed data for better results
