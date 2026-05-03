@@ -78,6 +78,7 @@ LIMIT 1;
 
 -- END OF TASK1
 
+
 -- TASK2 : COURSES & ENROLLMENTS
 
 -- CREATE COURSES TABLE
@@ -146,6 +147,7 @@ WHERE grade <40;
 
 -- END OF TASK2
 
+
 -- TASK3 : JOIN,GROUP BY, HAVING,and subqueries
 
 -- 1. TOP STUDENTS PER COURSES
@@ -191,6 +193,53 @@ HAVING COUNT(e.course_id) > 1;
 -- END OF TASK3
 
 
+-- TASK4 : ANALYTICAL REPORTS
+
+-- 1. AVERAGE GRADE BY GENDER
+
+SELECT s.gender,
+       AVG(e.grade) AS avg_grade
+FROM students s
+JOIN enrollments e ON s.studentID = e.student_id
+GROUP BY s.gender;
+
+-- 2. PASS RATE PER COURSE(grade>=40)
+
+SELECT c.name AS course,
+       SUM(CASE WHEN e.grade >= 40 THEN 1 ELSE 0 END) * 100.0 / COUNT(*) AS pass_rate
+FROM enrollments e
+JOIN courses c ON e.course_id = c.id
+GROUP BY c.name;
+
+-- 3. TOP 3 STUDENTS OVERALL
+
+SELECT s.name AS student,
+       AVG(e.grade) AS avg_grade
+FROM students s
+JOIN enrollments e ON s.studentId = e.student_id
+GROUP BY s.studentId, s.name
+ORDER BY avg_grade DESC
+LIMIT 3;
+
+-- 4. STUDENTS ENROLLED IN MORE THAN 2 COURSES
+
+SELECT s.name AS student,
+       COUNT(e.course_id) AS total_courses
+FROM students s
+JOIN enrollments e ON s.studentId = e.student_id
+GROUP BY s.studentId, s.name
+HAVING COUNT(e.course_id) > 2;
+
+-- 5. IMPROVEMENT REPORT
+
+SELECT s.name AS student,
+       MAX(e.grade) - MIN(e.grade) AS improvement
+FROM students s
+JOIN enrollments e ON s.studentId = e.student_id
+GROUP BY s.studentId, s.name
+HAVING improvement > 0;
+  
+  -- END OF TASK4
 
 
 
